@@ -48,6 +48,59 @@ select * from stu where english is null; 		-- 英语成绩是null的人，注意
 
 select * from stu where name like '马%';	-- 查询姓马的，模糊查询，_单个任意字符 %多个任意字符
 
+
 -- 排序查询==================================================================================
 
 select * from stu order by age asc,math desc;		-- 按照年龄增长的方式排序,如果年龄相同按照math降序排序
+
+
+-- 分组查询==================================================================================
+-- 聚合函数
+-- count() 参数建议写主键或者*，建议写*
+select count(id) from stu;	-- 查询班上多少人
+select count(*) from stu;		-- 建议写*
+-- max()
+select max(math) from stu;
+-- min()
+select min(english) from stu;
+-- sum()
+select sum(english) from stu;
+-- avg()
+select avg(math) from stu;
+
+-- 分组查询
+select sex,avg(math),count(*) from stu group by sex;		-- 查询男同学和女同学各自的数学平均分,以及各自的人数
+select sex,avg(math),count(*) from stu where math > 70 group by sex;	-- 查询男同学和女同学各自的数学平均分,以及各自的人数,要求：分数低于70分的不参与分组
+select sex,avg(math),count(*) from stu where math > 70 group by sex having count(*) > 2;-- 查询男同学和女同学各自的数学平均分,以及各自的人数,要求：分数低于70分的不参与分组,分组之后人数大于2个人
+
+
+-- 分页查询==================================================================================
+select * from stu limit 0,3;	-- 从0开始查询，查询3条数据
+select * from stu limit 3,3;  -- 每页查询3条数据，查询第二页,计算公式：起始索引=(当前页码 - 1)*每页显示的条数
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
